@@ -22,12 +22,12 @@ def chat():
         user_message = data.get("message", "").strip()
 
         if not user_message:
-            return jsonify({"error": "Message is required"}), 400
+            return jsonify({"error": "الرسالة مطلوبة."}), 400
 
         response = client.chat.completions.create(
             model=MODEL_NAME,
             messages=[
-                {"role": "system", "content": "You are a helpful assistant."},
+                {"role": "system", "content": "أنت مساعد ذكي ومفيد وتجيب باللغة العربية بشكل واضح."},
                 {"role": "user", "content": user_message}
             ]
         )
@@ -36,7 +36,7 @@ def chat():
         return jsonify({"reply": reply})
 
     except Exception as e:
-        return jsonify({"error": str(e)}), 500
+        return jsonify({"error": f"حدث خطأ: {str(e)}"}), 500
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    app.run(debug=True)
