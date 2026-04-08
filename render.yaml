@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: poe-chat-site
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    envVars:
+      - key: sk-poe-LnrqmsQxAB-0U3nFPSXc4DoAtYKmZeHkPapA0Pk696Y
+        sync: false
+      - key: POE_MODEL
+        value: GPT-5.2
+      - key: PYTHON_VERSION
+        value: 3.13.5
