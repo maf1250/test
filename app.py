@@ -5,11 +5,11 @@ message = fp.ProtocolMessage(
     content = "Hello world"
 )
 
-api_key = "YOUR_POE_API_KEY"  # or os.getenv("POE_API_KEY")
+api_key = "sk-poe-k7GRYbms63Kf9m5Fzk7IP-E6os2druFPlYdbVkxKKlg"  # or os.getenv("POE_API_KEY")
 
 for partial in fp.get_bot_response_sync(
     messages = [message],
-    bot_name = "rayatai",
+    bot_name = "RayatAI",
     api_key = api_key
 ):
     print(partial)
