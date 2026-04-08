@@ -5,11 +5,11 @@ from openai import OpenAI
 app = Flask(__name__)
 
 client = OpenAI(
-    api_key=os.getenv("sk-poe-LnrqmsQxAB-0U3nFPSXc4DoAtYKmZeHkPapA0Pk696Y"),
+    api_key=os.getenv("POE_API_KEY"),
     base_url="https://api.poe.com/v1",
 )
 
-MODEL_NAME = "DeepSeek-V3.2"  # change to a valid Poe model or bot
+MODEL_NAME = os.getenv("POE_MODEL", "GPT-5.2")
 
 @app.route("/")
 def home():
@@ -18,7 +18,7 @@ def home():
 @app.route("/chat", methods=["POST"])
 def chat():
     try:
-        data = request.get_json()
+        data = request.get_json(silent=True) or {}
         user_message = data.get("message", "").strip()
 
         if not user_message:
@@ -39,4 +39,4 @@ def chat():
         return jsonify({"error": str(e)}), 500
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=True)
